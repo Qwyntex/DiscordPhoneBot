@@ -3,6 +3,7 @@ package org.qhive.discordphonebot.DiscordBot.Commands;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
+import org.qhive.discordphonebot.Database.Database;
 
 import static org.qhive.discordphonebot.DiscordBot.Commands.CommandManager.registerSlashNewCommand;
 public class Commands {
@@ -21,6 +22,9 @@ public class Commands {
                 )),
                 event -> {
                     User user = event.getUser();
+                    if (Database.getUserDbId(user.getId()) == null) {
+                        Database.addUser(user.getId());
+                    }
                     user.openPrivateChannel().complete().sendMessage("You were registered for {number}").complete();
                     event.reply(
                             "You got registered the number {number}," +

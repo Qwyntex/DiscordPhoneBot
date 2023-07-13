@@ -1,4 +1,4 @@
-package org.qhive.discordphonebot;
+package org.qhive.discordphonebot.Webhook;
 
 import org.qhive.discordphonebot.Database.Temp;
 import org.qhive.discordphonebot.DiscordBot.BotWrapper;
