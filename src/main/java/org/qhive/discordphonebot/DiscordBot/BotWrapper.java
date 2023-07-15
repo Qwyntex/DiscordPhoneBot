@@ -14,7 +14,7 @@ public class BotWrapper {
     public static void init() throws LoginException, InterruptedException {
         new BotWrapper();
     }
-    private static JDA Bot;
+    public static JDA Bot;
 
     private BotWrapper() throws LoginException, InterruptedException {
         Bot = JDABuilder.createDefault(System.getenv("BOT-TOKEN"))

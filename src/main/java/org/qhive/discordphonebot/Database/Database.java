@@ -42,7 +42,10 @@ public class Database {
                 """).execute();
 
         connection.prepareStatement("""
-                INSERT INTO Users (id, user) VALUES (-1, 'null user')
+                INSERT IGNORE INTO Users (id, user) VALUES (-1, 'null user')
+                """).execute();
+        connection.prepareStatement("""
+                INSERT IGNORE INTO Numbers (id, number, user_id) VALUES (-1, 'null number', -1)
                 """).execute();
 
     }
@@ -117,6 +120,18 @@ public class Database {
             return -1;
         } catch (SQLException e) {
             throw new RuntimeException(e + "\n error retrieving number from database");
+        }
+    }
+
+    public static String getNextAvailableNumber() {
+        try {
+            ResultSet result = connection.prepareStatement("""
+                SELECT number FROM Numbers WHERE user_id = -1 AND NOT id = -1
+                """).executeQuery();
+            if (!result.next()) return null;
+            return result.getString(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e + "\n error getting next available number");
         }
     }
 }
