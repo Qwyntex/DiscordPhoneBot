@@ -22,13 +22,16 @@ public class Commands {
                 )),
                 event -> {
                     User user = event.getUser();
-                    if (Database.getUserDbId(user.getId()) == null) {
+                    if (Database.getUserDbId(user.getId()) == -1) {
                         Database.addUser(user.getId());
                     }
-                    user.openPrivateChannel().complete().sendMessage("You were registered for {number}").complete();
+                    String number ="1234567"; // TODO: get actual numbers and check if they are already in use
+                    Database.addNumber(number); // TODO: don't just add random number; again ^
+                    Database.assignNumber(number, user.getId());
+                    user.openPrivateChannel().complete().sendMessage("You were registered for " + number).complete();
                     event.reply(
-                            "You got registered the number {number}," +
-                                    " look into your private messages for more information"
+                            "You got registered the number " + number +
+                                    "; look into your private messages for more information"
                     ).setEphemeral(true).queue();
                 });
 
@@ -44,7 +47,6 @@ public class Commands {
                     CommandManager.updateCommands(event.getGuild());
                     event.reply("commands were successfully updated").queue();
                 });
-
 
         System.out.println("initialized commands");
     }

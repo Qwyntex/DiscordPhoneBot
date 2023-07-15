@@ -8,7 +8,7 @@ import java.util.function.Consumer;
 
 public class Command {
     public String name, description, usage;
-    OptionData[] options;
+    public OptionData[] options;
     private Consumer<SlashCommandInteractionEvent> action;
 
     public Command(String name, String description, String usage, OptionData... options) {

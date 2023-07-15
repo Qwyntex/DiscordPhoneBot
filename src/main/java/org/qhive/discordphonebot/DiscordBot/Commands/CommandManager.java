@@ -10,9 +10,11 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
+import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Consumer;
@@ -23,6 +25,7 @@ public class CommandManager extends ListenerAdapter {
     public CommandManager() {
         org.qhive.discordphonebot.DiscordBot.Commands.Commands.init();
         //TODO: onGuildJoin and onGuildReady do not get executed on startup
+        // manual updating required
     }
 
     @Override
@@ -51,7 +54,9 @@ public class CommandManager extends ListenerAdapter {
 
     public static void updateCommands(Guild guild) {
         Collection<CommandData> commandData = new ArrayList<>();
-        commands.forEach(command -> commandData.add(Commands.slash(command.name, command.description)));
+        commands.forEach(command -> commandData.add(
+                Commands.slash(command.name, command.description).addOptions(command.options)
+        ));
         guild.updateCommands().addCommands(commandData).queue();
     }
 
