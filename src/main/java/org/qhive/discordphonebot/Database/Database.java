@@ -1,10 +1,11 @@
 package org.qhive.discordphonebot.Database;
 
 import java.sql.*;
-
+// /shrd/applications/databases/4506
 public class Database {
 
     private static Connection connection;
+
     public static void init() throws SQLException {
         connection = DriverManager.getConnection(
                 "jdbc:mariadb://" + System.getenv("DB-URL"),
@@ -112,7 +113,7 @@ public class Database {
     public static int getNumberDbID(String number) {
         try {
             PreparedStatement statement = connection.prepareStatement("""
-                    SELECT id FROM Numbers where number = ?
+                    SELECT id FROM Numbers WHERE number = ?
                     """);
             statement.setString(1, number);
             ResultSet result = statement.executeQuery();
@@ -126,12 +127,27 @@ public class Database {
     public static String getNextAvailableNumber() {
         try {
             ResultSet result = connection.prepareStatement("""
-                SELECT number FROM Numbers WHERE user_id = -1 AND NOT id = -1
-                """).executeQuery();
+                    SELECT number FROM Numbers WHERE user_id = -1 AND NOT id = -1
+                    """).executeQuery();
             if (!result.next()) return null;
             return result.getString(1);
         } catch (SQLException e) {
             throw new RuntimeException(e + "\n error getting next available number");
+        }
+    }
+
+    public static String getUserFromNumber(String number) {
+        try {
+            PreparedStatement statement = connection.prepareStatement("""
+                    SELECT user FROM Numbers n LEFT JOIN Users u on n.user_id = u.id WHERE number = ?
+                    """);
+            statement.setString(1, number);
+
+            ResultSet result = statement.executeQuery();
+
+            return result.getString(1);
+        } catch (SQLException e) {
+            throw new RuntimeException(e + "\n error retrieving user by number");
         }
     }
 }
