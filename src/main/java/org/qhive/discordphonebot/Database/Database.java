@@ -1,11 +1,15 @@
 package org.qhive.discordphonebot.Database;
 
+import net.dv8tion.jda.api.entities.GuildMessageChannel;
+import org.qhive.discordphonebot.DiscordBot.BotWrapper;
+
+import javax.annotation.Nullable;
 import java.sql.*;
+
 // /shrd/applications/databases/4506
 public class Database {
 
     private static Connection connection;
-
     public static void init() throws SQLException {
         connection = DriverManager.getConnection(
                 "jdbc:mariadb://" + System.getenv("DB-URL"),
@@ -136,6 +140,7 @@ public class Database {
         }
     }
 
+    @Nullable
     public static String getUserFromNumber(String number) {
         try {
             PreparedStatement statement = connection.prepareStatement("""
@@ -144,7 +149,11 @@ public class Database {
             statement.setString(1, number);
 
             ResultSet result = statement.executeQuery();
-
+            if (!result.next()) {
+                System.out.println("Number not in database");
+                // BotWrapper.sendMessage("recieved information about a number that is not in the database", adminChannel);
+                return null; // TODO: better error handling
+            }
             return result.getString(1);
         } catch (SQLException e) {
             throw new RuntimeException(e + "\n error retrieving user by number");

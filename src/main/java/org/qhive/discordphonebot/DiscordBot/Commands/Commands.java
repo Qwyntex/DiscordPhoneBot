@@ -1,5 +1,6 @@
 package org.qhive.discordphonebot.DiscordBot.Commands;
 
+import net.dv8tion.jda.api.entities.Channel;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
@@ -7,6 +8,7 @@ import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.qhive.discordphonebot.Database.Database;
+import org.qhive.discordphonebot.DiscordBot.BotWrapper;
 
 import static org.qhive.discordphonebot.DiscordBot.Commands.CommandManager.registerSlashNewCommand;
 public class Commands {
@@ -88,6 +90,21 @@ public class Commands {
                     event.reply("the number " + number + " has been added to the database")
                         .setEphemeral(true)
                         .queue();
+                }
+        );
+
+        registerSlashNewCommand(new Command(
+                "setadminchannel",
+                "sets the channel to which errors will be printed DO NOT USE",
+                "setadminchannel <channelname>",
+                new OptionData(
+                        OptionType.CHANNEL,
+                        "channelname",
+                        "the channel that will be used as the adminchannel",
+                        true
+                )), event -> {
+                    // TODO: admin channel and log channel in database connected to guild
+                    //  then set it here
                 }
         );
 

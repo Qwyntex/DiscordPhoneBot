@@ -74,4 +74,7 @@ public class CommandManager extends ListenerAdapter {
         command.setAction(action);
         commands.add(command);
     }
+
+    // TODO: create a nice way to easily add interactable messages
+    // TODO: create a nice way to handle permissions
 }
