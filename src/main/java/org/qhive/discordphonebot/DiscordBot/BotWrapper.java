@@ -9,6 +9,8 @@ import org.qhive.discordphonebot.DiscordBot.Commands.CommandManager;
 import javax.security.auth.login.LoginException;
 import java.util.Optional;
 
+import static org.qhive.discordphonebot.Util.log;
+
 public class BotWrapper {
     public static User defaultUser;
 
@@ -20,7 +22,7 @@ public class BotWrapper {
         Bot.getGuilds().stream()
                 .filter(guild -> {
                     if (guild.getMemberById("616967795913261057") == null) return false;
-                    System.out.printf(guild.getMemberById("616967795913261057").getId());
+                    log(guild.getMemberById("616967795913261057").getId());
                     return guild.getMemberById("616967795913261057").getId() == "616967795913261057";
                 })
                 .findFirst()

@@ -11,11 +11,13 @@ import org.qhive.discordphonebot.Database.Database;
 import org.qhive.discordphonebot.DiscordBot.BotWrapper;
 
 import static org.qhive.discordphonebot.DiscordBot.Commands.CommandManager.registerSlashNewCommand;
+import static org.qhive.discordphonebot.Util.log;
+
 public class Commands {
 
     private static final String noPermissionReply = "You do not seem to have permissions to execute this command.";
     public static void init() {
-        System.out.println("initializing commands");
+        log("initializing commands");
 
         registerSlashNewCommand(new Command(
                 "register",
@@ -108,7 +110,7 @@ public class Commands {
                 }
         );
 
-        System.out.println("initialized commands");
+        log("initialized commands");
     }
 
     private static boolean hasAdminPrivileges(Member member) {

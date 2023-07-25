@@ -2,6 +2,7 @@ package org.qhive.discordphonebot.Database;
 
 import net.dv8tion.jda.api.entities.GuildMessageChannel;
 import org.qhive.discordphonebot.DiscordBot.BotWrapper;
+import org.qhive.discordphonebot.Util;
 
 import javax.annotation.Nullable;
 import java.sql.*;
@@ -17,7 +18,7 @@ public class Database {
                 System.getenv("DB-ACCESS")
         );
 
-        if (!connection.isValid(1000)) {
+        if (!connection.isValid(10)) {
             throw new RuntimeException("Can't connect to database");
         }
 
@@ -86,8 +87,8 @@ public class Database {
     public static void assignNumber(String number, String userId) {
         try {
             if (getNumberDbID(number) == -1) {
-                System.out.println("the number cannot be assigned due to it not existing in the database." +
-                        " You might want to add it");
+                Util.log("the number cannot be assigned due to it not existing in the database." +
+                         " You might want to add it");
                 return;
             }
             PreparedStatement statement = connection.prepareStatement("""
@@ -150,7 +151,7 @@ public class Database {
 
             ResultSet result = statement.executeQuery();
             if (!result.next()) {
-                System.out.println("Number not in database");
+                Util.log("Number not in database");
                 // BotWrapper.sendMessage("recieved information about a number that is not in the database", adminChannel);
                 return null; // TODO: better error handling
             }
