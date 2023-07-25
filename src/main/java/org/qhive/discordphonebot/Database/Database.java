@@ -1,7 +1,5 @@
 package org.qhive.discordphonebot.Database;
 
-import net.dv8tion.jda.api.entities.GuildMessageChannel;
-import org.qhive.discordphonebot.DiscordBot.BotWrapper;
 import org.qhive.discordphonebot.Util;
 
 import javax.annotation.Nullable;

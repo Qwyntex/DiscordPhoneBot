@@ -7,26 +7,14 @@ import org.jetbrains.annotations.Nullable;
 import org.qhive.discordphonebot.DiscordBot.Commands.CommandManager;
 
 import javax.security.auth.login.LoginException;
-import java.util.Optional;
-
-import static org.qhive.discordphonebot.Util.log;
 
 public class BotWrapper {
-    public static User defaultUser;
 
     public static void init() throws LoginException, InterruptedException {
         Bot = JDABuilder.createDefault(System.getenv("BOT-TOKEN"))
                 .build().awaitReady();
 
         Bot.addEventListener(new CommandManager());
-        Bot.getGuilds().stream()
-                .filter(guild -> {
-                    if (guild.getMemberById("616967795913261057") == null) return false;
-                    log(guild.getMemberById("616967795913261057").getId());
-                    return guild.getMemberById("616967795913261057").getId() == "616967795913261057";
-                })
-                .findFirst()
-                .ifPresent(guild -> defaultUser = guild.getMemberById("616967795913261057").getUser());
     }
     public static JDA Bot;
 

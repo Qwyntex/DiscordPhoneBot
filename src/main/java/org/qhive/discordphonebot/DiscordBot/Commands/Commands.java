@@ -1,14 +1,11 @@
 package org.qhive.discordphonebot.DiscordBot.Commands;
 
-import net.dv8tion.jda.api.entities.Channel;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.User;
-import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.OptionMapping;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.qhive.discordphonebot.Database.Database;
-import org.qhive.discordphonebot.DiscordBot.BotWrapper;
 
 import static org.qhive.discordphonebot.DiscordBot.Commands.CommandManager.registerSlashNewCommand;
 import static org.qhive.discordphonebot.Util.log;

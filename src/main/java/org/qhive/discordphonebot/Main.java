@@ -5,7 +5,6 @@ import org.qhive.discordphonebot.DiscordBot.BotWrapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import javax.security.auth.login.LoginException;
 import java.sql.SQLException;
 
 @SpringBootApplication

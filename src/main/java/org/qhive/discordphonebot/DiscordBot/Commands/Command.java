@@ -3,12 +3,11 @@ package org.qhive.discordphonebot.DiscordBot.Commands;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
-import java.util.ArrayList;
 import java.util.function.Consumer;
 
 public class Command {
-    public String name, description, usage;
-    public OptionData[] options;
+    public final String name, description, usage;
+    public final OptionData[] options;
     private Consumer<SlashCommandInteractionEvent> action;
 
     public Command(String name, String description, String usage, OptionData... options) {

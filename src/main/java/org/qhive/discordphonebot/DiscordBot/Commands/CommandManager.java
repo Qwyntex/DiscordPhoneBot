@@ -1,7 +1,6 @@
 package org.qhive.discordphonebot.DiscordBot.Commands;
 
 import net.dv8tion.jda.api.entities.Guild;
-import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.guild.GuildAvailableEvent;
 import net.dv8tion.jda.api.events.guild.GuildJoinEvent;
 import net.dv8tion.jda.api.events.guild.GuildReadyEvent;
@@ -12,7 +11,6 @@ import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import org.jetbrains.annotations.NotNull;
 import org.qhive.discordphonebot.DiscordBot.BotWrapper;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -75,6 +73,6 @@ public class CommandManager extends ListenerAdapter {
         commands.add(command);
     }
 
-    // TODO: create a nice way to easily add interactable messages
+    // TODO: create a nice way to easily add interact-able messages
     // TODO: create a nice way to handle permissions
 }
