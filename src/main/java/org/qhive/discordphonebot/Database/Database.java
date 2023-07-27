@@ -5,6 +5,7 @@ import org.qhive.discordphonebot.Util;
 import javax.annotation.Nullable;
 import java.sql.*;
 
+import static org.qhive.discordphonebot.Main.dotenv;
 import static org.qhive.discordphonebot.Util.log;
 
 // /shrd/applications/databases/4506
@@ -13,9 +14,9 @@ public class Database {
     private static Connection connection;
     public static void init() throws SQLException {
         connection = DriverManager.getConnection(
-                "jdbc:mariadb://" + System.getenv("DB-URL"),
-                System.getenv("DB-USER"),
-                System.getenv("DB-ACCESS")
+                "jdbc:mariadb://" + dotenv.get("DB_URL"),
+                dotenv.get("DB_USER"),
+                dotenv.get("DB_ACCESS")
         );
 
         if (!connection.isValid(10)) {

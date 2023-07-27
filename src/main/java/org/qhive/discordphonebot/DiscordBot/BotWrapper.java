@@ -9,10 +9,12 @@ import org.qhive.discordphonebot.Util;
 
 import javax.security.auth.login.LoginException;
 
+import static org.qhive.discordphonebot.Main.dotenv;
+
 public class BotWrapper {
 
     public static void init() throws LoginException, InterruptedException {
-        Bot = JDABuilder.createDefault(System.getenv("BOT-TOKEN"))
+        Bot = JDABuilder.createDefault(dotenv.get("BOT_TOKEN"))
                 .build().awaitReady();
 
         Bot.addEventListener(new CommandManager());

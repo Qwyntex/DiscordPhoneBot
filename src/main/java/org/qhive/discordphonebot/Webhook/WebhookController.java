@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @RestController
 public class WebhookController {
-    @PostMapping("/messages")
+    @PostMapping("/dpbot/messages")
     public void receiveWebhook(@RequestBody String payload) {
         Util.log(payload);
 
