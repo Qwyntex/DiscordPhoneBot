@@ -36,8 +36,8 @@ public class Message {
     public String[] media_urls;
     public boolean use_profile_webhooks;
 
-    public String getAsReadableMessage() {
-        return String.format("""
+    public String getAsReadableMessage(boolean textOnly) {
+        return textOnly ? String.format("""
                 `To:   %s`
                 `From: %s`
                 ### %s
@@ -46,6 +46,10 @@ public class Message {
                 to,
                 from,
                 subject,
+                text
+        ) : String.format("""
+                > %s
+                """,
                 text
         );
     }

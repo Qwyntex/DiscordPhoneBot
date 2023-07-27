@@ -39,8 +39,23 @@ public class WebhookController {
         User user = BotWrapper.getUserFromID(user_id);
         if (user == null) return;
 
-        String reply = message.getAsReadableMessage();
+        // temp
+        List<net.dv8tion.jda.api.entities.Message> history = user
+                .openPrivateChannel()
+                .complete()
+                .getHistory()
+                .retrievePast(1).complete();
+
+        if (history.isEmpty()) return;
+        net.dv8tion.jda.api.entities.Message temp = history.stream().findFirst().get();
+        String messageContent = temp.getContentDisplay();
+        boolean isContextClear = messageContent.contains("From: " + message.from)
+         && messageContent.contains("To  : " + message.to);
+        //temp end
+
+        String reply = message.getAsReadableMessage(isContextClear);
 
         BotWrapper.sendMessage(reply, user);
+        // TODO: so much
     }
 }
