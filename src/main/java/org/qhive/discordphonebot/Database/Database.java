@@ -5,6 +5,8 @@ import org.qhive.discordphonebot.Util;
 import javax.annotation.Nullable;
 import java.sql.*;
 
+import static org.qhive.discordphonebot.Util.log;
+
 // /shrd/applications/databases/4506
 public class Database {
 
@@ -85,7 +87,7 @@ public class Database {
     public static void assignNumber(String number, String userId) {
         try {
             if (getNumberDbID(number) == -1) {
-                Util.log("the number cannot be assigned due to it not existing in the database." +
+                log("the number cannot be assigned due to it not existing in the database." +
                          " You might want to add it");
                 return;
             }
@@ -149,11 +151,15 @@ public class Database {
 
             ResultSet result = statement.executeQuery();
             if (!result.next()) {
-                Util.log("Number not in database");
-                // BotWrapper.sendMessage("recieved information about a number that is not in the database", adminChannel);
+                log("Number not in database" + number);
                 return null; // TODO: better error handling
             }
-            return result.getString(1);
+            String user_id = result.getString(1);
+            if (user_id.equals("null user")) {
+                log("No user associated with that number");
+                return null;
+            }
+            return user_id;
         } catch (SQLException e) {
             throw new RuntimeException(e + "\n error retrieving user by number");
         }

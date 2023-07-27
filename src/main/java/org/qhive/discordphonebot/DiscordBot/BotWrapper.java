@@ -5,6 +5,7 @@ import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.*;
 import org.jetbrains.annotations.Nullable;
 import org.qhive.discordphonebot.DiscordBot.Commands.CommandManager;
+import org.qhive.discordphonebot.Util;
 
 import javax.security.auth.login.LoginException;
 
@@ -29,6 +30,8 @@ public class BotWrapper {
 
     @Nullable
     public static User getUserFromID(String user_id) {
-        return Bot.retrieveUserById(user_id).complete();
+        User user = Bot.retrieveUserById(user_id).complete();
+        if (user == null) Util.log("could not retrieve user with that id");
+        return user;
     }
 }

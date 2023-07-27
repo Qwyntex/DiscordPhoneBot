@@ -92,21 +92,6 @@ public class Commands {
                 }
         );
 
-        registerSlashNewCommand(new Command(
-                "setadminchannel",
-                "sets the channel to which errors will be printed DO NOT USE",
-                "setadminchannel <channelname>",
-                new OptionData(
-                        OptionType.CHANNEL,
-                        "channelname",
-                        "the channel that will be used as the adminchannel",
-                        true
-                )), event -> {
-                    // TODO: admin channel and log channel in database connected to guild
-                    //  then set it here
-                }
-        );
-
         log("initialized commands");
     }
 
